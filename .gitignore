@@ -1,0 +1,12 @@
+# Julia
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+Manifest.toml
+
+# Generated outputs
+plots/*.png
+
+# Editor
+.vscode/
+.DS_Store
