@@ -44,27 +44,27 @@ The choice of weakly informative priors is deliberate: the prior for `beta` is w
 ## Results
 
 ### Posterior Distributions
-![Posterior Distributions](plots/posterior_distributions.png)
+
 
 The red dashed line marks zero. Key observation: **beta's posterior straddles zero** — meaning lagged volatility does not reliably predict the direction of tomorrow's return. This is consistent with the Efficient Market Hypothesis. The baseline return `alpha` is also near zero, as expected for a large-cap index.
 
 ### Trace Plots
-![Trace Plots](plots/trace_plots.png)
+
 
 Well-mixed chains with no drift — the NUTS sampler has converged. All R-hat values are close to 1.0 (see terminal output). This means the 1000 posterior samples are reliable draws from the true posterior.
 
 ### Credible Intervals
-![Credible Intervals](plots/credible_intervals.png)
+
 
 The 95% credible interval for `beta` crosses zero, confirming the finding above. The high `sigma` posterior (~1.0 on the standardised scale) tells us that most of the variance in daily returns is unexplained — the model is honestly saying *"I don't know"*, which is the right answer for daily stock returns.
 
 ### Posterior Predictive Check
-![Posterior Predictive Check](plots/posterior_predictive_check.png)
+
 
 Predicted vs actual returns using 300 posterior draws. The weak correlation is expected — if returns were easily predictable, they would already be arbitraged away. The scatter confirms the model is not overconfident.
 
 ### Raw Return Series
-![Return Series](plots/return_series.png)
+
 
 NIFTY 50 daily returns (blue) vs lagged volatility (orange). Notice that volatility clusters (large moves tend to follow large moves) but the *direction* of the next day's return is not predictable from magnitude alone.
 
@@ -127,15 +127,7 @@ The script pulls data live from Yahoo Finance — no manual CSV download needed.
 
 ---
 
-## Connection to GSoC 2026
 
-This project sits outside my GSoC proposal on purpose — it's a genuine exploration of Julia's ML ecosystem, not a proof-of-concept for the GNN work. That said, there are real technical overlaps:
-
-- Turing's use of Zygote for gradient computation is directly relevant to the sparse backward pass problem I address in my proposal (§7.2)
-- The dispatch model in Turing.jl (different samplers, different backends, one model definition) is the same pattern used in `GNNlib.jl` to switch between gather/scatter and SpMM execution paths
-- Working in Julia outside of GNNs helped me become comfortable with the type system and multiple dispatch, which are essential for the low-level CUDA.jl work in my proposal
-
----
 
 ## References
 
